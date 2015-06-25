@@ -1,0 +1,7 @@
+#Keyboard {
+	position: absolute;
+	left: 50%;
+	margin-right: -50%;
+	bottom: 10px;
+	transform: translate(-50%, 0);
+}

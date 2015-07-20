@@ -1,7 +1,70 @@
-#Keyboard {
+
+#canvasDiv {
+	width: 640px;
+	height: 768px;
+	margin: 0 auto;
+}
+.mainCanvas {
+	width: auto;
+	height: 768px;
+	border: 2px solid black;
+	overflow: hidden;
+}
+#inputFrame {
 	position: absolute;
-	left: 50%;
-	margin-right: -50%;
-	bottom: 10px;
-	transform: translate(-50%, 0);
+	right: 0px;
+	top: 0px;
+	height: 768px;
+	width: 220px;
+	display: none;
+}
+#textInput {
+	position: relative;
+	top: 5px;
+	right: 5px;
+	width: 100%;
+	height: 730px;
+}
+#btnQueue {
+	position: absolute;
+	top: 750px;
+	right: 120px;
+	width: 100px;
+}
+#btnClear {
+	position: absolute;
+	top: 750px;
+	right: 5px;
+	width: 100px;
+}
+@media (min-width: 880px) {
+	#canvasDiv {
+		margin: 0 0;
+	}
+	.mainCanvas {
+		left: 0px;
+	}
+	#inputFrame {
+		display: block;
+	}
+}
+@media (min-width: 1000px) {
+	#inputFrame {
+		width: 340px;
+	}
+}
+@media (min-width: 1100px) {
+	#inputFrame {
+		width: 440px;
+	}
+}
+@media (min-width: 1200px) {
+	#inputFrame {
+		width: 540px;
+	}
+}
+@media (min-width: 1300px) {
+	#inputFrame {
+		width: 640px;
+	}
 }

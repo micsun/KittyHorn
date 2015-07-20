@@ -1,14 +1,29 @@
+
 <html>
 	<head>
 		<link rel="stylesheet" href="styles/style.css">
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.16.1/TweenMax.min.js"></script>
+		<script src="https://code.createjs.com/easeljs-0.8.0.min.js"></script>
 		<script src="scripts/audiosynth.js"></script>
-	</head>
+ 	</head>
 	<body>
-		<h1>Hello, welcome to KittyHorn 0.1a</h1>
-		<div id="Volume"></div>
-		<div id="Duration"></div>
-		<div id="Instrument"></div>
-		<img id="Keyboard" src="assets/images/Keyboard.jpg">
+		<div id="canvasDiv" width=640>
+			<canvas id="mainCanvas" class="mainCanvas" width=640 height=768></canvas>
+		</div>
+		<div id="inputFrame">
+			<textarea id="textInput" placeholder="Record or playback stuff!" autofocus>hkz hkz hk
+hkz hkz hkh hhhdhkjk hhhhdhkj
+hhdhklkh klkh hhdhkz zzlklzh
+hjkh hkjhjkx hhhdhkjk hhhhdhkjh
+hGh hkz hkz hk hkz hkz hkh
+sssosfdf ssssosfd ssssosfgfs
+ssfgfs ssosfh hhgfghs ssdfs
+sfdsdfj sosososo
+lllhlxzx llllhlxz llllh lxcxl llxcxl lxlv vvcxcvl
+llzxl xzlzxb lllhlxzx</textarea>
+			<button id="btnQueue">Queue</button>
+			<button id="btnClear">Clear</button>
+		<div>
 		<script src="scripts/script.js"></script>
 	</body>
 </html>

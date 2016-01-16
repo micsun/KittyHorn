@@ -67,6 +67,7 @@ function init()
 	refreshDuration()
 	initInstruments();
 	addEventListeners();
+	queueInput();
 	startGame();
 }
 
@@ -87,7 +88,7 @@ function getKey(value)
 		}
 	}
 
-	console.info('getKey ==> value not found, "' + value + '"');
+	value !== ' ' && console.info('getKey ==> value not found, "' + value + '"');
 	return null;
 }
 
@@ -96,36 +97,38 @@ function spawnObject()
 	if (letters.length < 10)
 	{
 		var targetKey = getNextKey();
-
-		if (targetKey === null)
+		
+		if (targetKey.key === null)
 		{
-			TweenMax.delayedCall(Math.random() * 2 + 0.2, spawnObject);
+			TweenMax.delayedCall(Math.random() * 0.5 + 0.5, spawnObject);
 			return;
 		}
 
-		var o = new createjs.Text(targetKey[Math.random() < 0.5 ? "primary" : "secondary"], "20px Arial Black", "#fff");
-		o.x = targetKey.x + inst_Keyboard.x - o.getMetrics().width * 0.5;
+		var o = new createjs.Text(targetKey.character, "20px Arial Black", "#fff");
+		o.x = targetKey.key.x + inst_Keyboard.x - o.getMetrics().width * 0.5;
 		o.y = 110;
 		TweenMax.from(o, 0.25, {alpha:0});
-		var t = TweenMax.to(o, 5, {y:targetKey.y + inst_Keyboard.y - o.getMetrics().height * 0.5, ease:Power2.easeInOut, onComplete:handleFailure});
+		var t = TweenMax.to(o, 3, {y:targetKey.key.y + inst_Keyboard.y - o.getMetrics().height * 0.5, ease:Power2.easeInOut, onComplete:handleFailure});
 		stage.addChild(o);
 		letters.push(t);
 	}
 
-	TweenMax.delayedCall(Math.random() * 2 + 0.2, spawnObject);
+	TweenMax.delayedCall(0.5, spawnObject);
 }
 
 function getNextKey()
 {
 	if (queue != "")
 	{
-		var c = getKey(queue.charAt(0));
+		var character = queue.charAt(0);
+		var key = getKey(character);
 		queue = queue.slice(1);
-		return c;
+		return {character:character, key:key};
 	}
 	else
 	{
-		return keys[Math.floor(Math.random() * keys.length)];
+		var key = keys[Math.floor(Math.random() * keys.length)];
+		return {character:key[Math.random() < 0.5 ? "primary" : "secondary"], key:key};
 	}
 }
 
@@ -276,7 +279,7 @@ function mow(key_data, is_primary)
 			Synth.play(instrument, key_data.note, key_data.octave, duration);
 			letters.splice(i, 1);
 			var tl = new TimelineMax();
-			tl.to(key_data.correct, 0.25, {alpha:0.5, ease:Power2.easeOut})
+			tl	.to(key_data.correct, 0.25, {alpha:0.5, ease:Power2.easeOut})
 				.to(key_data.correct, 0.75, {alpha:0.01, ease:Power2.easeIn});
 			return;
 		}
@@ -353,7 +356,7 @@ function refreshTitle()
 {
 	if (inst_Title === undefined)
 	{
-		inst_Title = new createjs.Text("KittyHorn 0.0.2", "20px Arial", "#000");
+		inst_Title = new createjs.Text("KittyHorn 0.0.3", "20px Arial", "#000");
 		stage.addChild(inst_Title);
 	}
 
